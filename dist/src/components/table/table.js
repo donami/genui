@@ -42,7 +42,7 @@ var Table = /** @class */ (function (_super) {
     };
     return Table;
 }(React.Component));
-var StyledTable = styled.table(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  border: #ccc 1px solid;\n  margin-bottom: 20px;\n  width: 100%;\n  border-radius: 0.3rem;\n  text-align: left;\n  border-collapse: collapse;\n\n  a {\n    color: #0366d6;\n    text-decoration: none;\n  }\n\n  th,\n  td {\n    padding: 0.8em;\n  }\n\n  th {\n    background: #f9fafb;\n    border-bottom: 1px solid #ccc;\n  }\n"], ["\n  border: #ccc 1px solid;\n  margin-bottom: 20px;\n  width: 100%;\n  border-radius: 0.3rem;\n  text-align: left;\n  border-collapse: collapse;\n\n  a {\n    color: #0366d6;\n    text-decoration: none;\n  }\n\n  th,\n  td {\n    padding: 0.8em;\n  }\n\n  th {\n    background: #f9fafb;\n    border-bottom: 1px solid #ccc;\n  }\n"])));
+var StyledTable = styled.table(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  border: #ccc 1px solid;\n  margin-bottom: 20px;\n  width: 100%;\n  border-radius: 0.3rem;\n  text-align: left;\n  border-collapse: collapse;\n  background: #fff;\n\n  a {\n    text-decoration: none;\n  }\n\n  th,\n  td {\n    padding: 0.8em;\n  }\n\n  th {\n    border-bottom: 1px solid #ccc;\n  }\n"], ["\n  border: #ccc 1px solid;\n  margin-bottom: 20px;\n  width: 100%;\n  border-radius: 0.3rem;\n  text-align: left;\n  border-collapse: collapse;\n  background: #fff;\n\n  a {\n    text-decoration: none;\n  }\n\n  th,\n  td {\n    padding: 0.8em;\n  }\n\n  th {\n    border-bottom: 1px solid #ccc;\n  }\n"])));
 export default Table;
 var templateObject_1;
 //# sourceMappingURL=table.js.map

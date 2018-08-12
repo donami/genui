@@ -30,7 +30,7 @@ const colors = {
   teal: '#00b5ad',
   blue: '#2185d0',
   violet: '#6435c9',
-  purple: '#a333c8',
+  purple: '#7f44ff',
   pink: '#e03997',
   brown: '#a5673f',
   grey: '#767676',

@@ -59,9 +59,9 @@ const StyledTable = styled.table`
   border-radius: 0.3rem;
   text-align: left;
   border-collapse: collapse;
+  background: #fff;
 
   a {
-    color: #0366d6;
     text-decoration: none;
   }
 
@@ -71,7 +71,6 @@ const StyledTable = styled.table`
   }
 
   th {
-    background: #f9fafb;
     border-bottom: 1px solid #ccc;
   }
 `;

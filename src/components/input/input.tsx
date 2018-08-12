@@ -37,6 +37,8 @@ const StyledInput = styled.input`
   -webkit-box-shadow: none;
   box-shadow: none;
 
+  box-sizing: border-box;
+
   &:focus {
     border-color: #85b7d9;
     background: #fff;

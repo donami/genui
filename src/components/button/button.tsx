@@ -90,6 +90,14 @@ const color = ({ color }: Props) => {
         background-image: none;
       `;
 
+    case 'purple':
+      return css`
+        background-color: #7f44ff;
+        color: #fff;
+        text-shadow: none;
+        background-image: none;
+      `;
+
     default:
       return null;
   }
