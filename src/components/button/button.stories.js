@@ -19,7 +19,11 @@ storiesOf('Components/Button', module)
   <Button color="teal">
     Button
   </Button>
-  ~~~`)(() => <Button color="blue">Button</Button>)
+  ~~~`)(() => (
+      <Button color="blue" icon="fa fas-cog">
+        Button
+      </Button>
+    ))
   )
   .addWithJSX(
     'colored Button',

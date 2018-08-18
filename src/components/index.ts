@@ -9,5 +9,6 @@ export { default as Dropdown } from './dropdown';
 export { default as Heading } from './heading';
 export { default as Badge } from './badge';
 export { default as List } from './list';
+export { default as Message } from './message';
 export { default as Select, SelectItem } from './select';
 export { Field } from './form';

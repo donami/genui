@@ -36,6 +36,7 @@ const StyledInput = styled.input`
     -webkit-box-shadow 0.1s ease;
   -webkit-box-shadow: none;
   box-shadow: none;
+  font-family: inherit;
 
   box-sizing: border-box;
 

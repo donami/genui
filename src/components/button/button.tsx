@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
+import Icon from '../icon/icon';
 
 const sizes = {
   mini: '0.78571429rem',
@@ -17,25 +18,6 @@ const size = ({ size }: Props) => {
   if (size) {
     return css`
       font-size: ${sizes[size]};
-    `;
-  }
-  return null;
-};
-
-const useIcon = ({ useIcon }: Props) => {
-  if (useIcon) {
-    return `
-      padding: 0.78571429em 0.78571429em 0.78571429em;
-
-      i,
-      svg {
-        height: 0.85714286em;
-        -webkit-transition: opacity 0.1s ease;
-        transition: opacity 0.1s ease;
-        opacity: 0.9;
-        margin: 0 !important;
-        vertical-align: top;
-      }
     `;
   }
   return null;
@@ -64,6 +46,12 @@ const color = ({ color }: Props) => {
         color: #fff;
         text-shadow: none;
         background-image: none;
+
+        &:hover {
+          background-color: #1678c2;
+          color: #fff;
+          text-shadow: none;
+        }
       `;
 
     case 'red':
@@ -72,6 +60,12 @@ const color = ({ color }: Props) => {
         color: #fff;
         text-shadow: none;
         background-image: none;
+
+        &:hover {
+          background-color: #d01919;
+          color: #fff;
+          text-shadow: none;
+        }
       `;
 
     case 'teal':
@@ -80,6 +74,12 @@ const color = ({ color }: Props) => {
         color: #fff;
         text-shadow: none;
         background-image: none;
+
+        &:hover {
+          background-color: #009c95;
+          color: #fff;
+          text-shadow: none;
+        }
       `;
 
     case 'green':
@@ -88,6 +88,12 @@ const color = ({ color }: Props) => {
         color: #fff;
         text-shadow: none;
         background-image: none;
+
+        &:hover {
+          background-color: #16ab39;
+          color: #fff;
+          text-shadow: none;
+        }
       `;
 
     case 'purple':
@@ -96,6 +102,12 @@ const color = ({ color }: Props) => {
         color: #fff;
         text-shadow: none;
         background-image: none;
+
+        &:hover {
+          background-color: #9627ba;
+          color: #fff;
+          text-shadow: none;
+        }
       `;
 
     default:
@@ -120,29 +132,37 @@ const disabled = ({ disabled }: Props) => {
 export interface Props {
   color?: string;
   size?: string;
+  icon?: string;
   disabled?: boolean;
   circular?: boolean;
-  useIcon?: boolean;
   onClick?: () => void;
   children: any;
   to?: string;
 }
 
-const Button: React.SFC<Props> = ({ to, useIcon, children, ...props }) => {
+const Button: React.SFC<Props> = ({
+  to,
+  children,
+  circular,
+  icon,
+  ...props
+}) => {
   const injectedProps = {
     ...props,
     circular: circular ? 1 : 0,
   };
 
+  const content = icon ? <Icon name={icon} /> : children;
+
   if (to) {
     return (
       <Link to={to} {...injectedProps}>
-        {children}
+        {content}
       </Link>
     );
   }
 
-  return <button {...injectedProps}>{children}</button>;
+  return <button {...injectedProps}>{content}</button>;
 };
 
 const StyledButton = styled(Button)`
@@ -185,11 +205,36 @@ const StyledButton = styled(Button)`
   -webkit-tap-highlight-color: transparent;
   overflow: visible;
 
+  &:hover {
+    background-color: #cacbcd;
+    background-image: none;
+    -webkit-box-shadow: 0 0 0 1px transparent inset,
+      0 0 0 0 rgba(34, 36, 38, 0.15) inset;
+    box-shadow: 0 0 0 1px transparent inset,
+      0 0 0 0 rgba(34, 36, 38, 0.15) inset;
+    color: rgba(0, 0, 0, 0.8);
+  }
+
+  i {
+    margin: 0 0.42857143em 0 -0.21428571em;
+    opacity: 0.5;
+  }
+
   ${disabled};
   ${color};
   ${circular};
-  ${useIcon};
   ${size};
+
+  ${({ icon }) =>
+    icon &&
+    css`
+      padding: 0.78571429em 1em 0.78571429em;
+
+      i {
+        margin: 0;
+        opacity: 0.5;
+      }
+    `};
 `;
 
 export default StyledButton;
