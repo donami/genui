@@ -37,7 +37,7 @@ var colors = function (color) {
 };
 var StyledIcon = styled.i(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  ", ";\n"], ["\n  ", ";\n"])), function (props) { return props.color && colors(props.color); });
 var Icon = function (_a) {
-    var name = _a.name, size = _a.size, className = _a.className, other = __rest(_a, ["name", "size", "className"]);
+    var name = _a.name, size = _a.size, fixedWidth = _a.fixedWidth, className = _a.className, other = __rest(_a, ["name", "size", "fixedWidth", "className"]);
     var sizeClasses = {
         xs: 'fa-xs',
         sm: 'fa-sm',
@@ -54,6 +54,9 @@ var Icon = function (_a) {
     };
     var classes = className ? className.split(' ') : [];
     classes.push(name);
+    if (fixedWidth) {
+        classes.push('fa-fw');
+    }
     if (size && sizeClasses[size]) {
         classes.push(sizeClasses[size]);
     }

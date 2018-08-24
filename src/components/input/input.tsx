@@ -2,23 +2,36 @@ import * as React from 'react';
 
 import styled from '../../styled/styled-components';
 
-type Props = {};
-
-type State = {
-  dirty: boolean;
+export type Props = {
+  onValueChange?(value: string): any;
+  onChange?: any;
 };
 
+export type State = Readonly<{
+  dirty: boolean;
+  value: string;
+}>;
+
 class Input extends React.Component<Props, State> {
-  state: State = {
+  readonly state: State = {
     dirty: false,
+    value: '',
+  };
+
+  handleOnChange = (e: any) => {
+    const { value } = e.target;
+
+    this.setState({ value, dirty: true });
+    this.props.onValueChange && this.props.onValueChange(value);
+    this.props.onChange && this.props.onChange(e);
   };
 
   render() {
-    return <StyledInput {...this.props} />;
+    return <StyledInput {...this.props} onChange={this.handleOnChange} />;
   }
 }
 
-const StyledInput = styled.input`
+export const StyledInput = styled.input`
   margin: 0;
   max-width: 100%;
   outline: 0;

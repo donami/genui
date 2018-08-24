@@ -22,7 +22,7 @@ var __rest = (this && this.__rest) || function (s, e) {
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css, withProps } from '../../styled/styled-components';
-var sizes = {
+export var sizes = {
     mini: 0.5,
     tiny: 0.6,
     small: 0.7,
@@ -32,7 +32,7 @@ var sizes = {
     huge: 1.4,
     massive: 1.6,
 };
-var colors = {
+export var colors = {
     red: '#db2828',
     orange: '#f2711c',
     yellow: '#fbbd08',
@@ -56,7 +56,7 @@ var Element = function (_a) {
     }
     return React.createElement(type, injectedProps, children);
 };
-var StyledBadge = withProps()(styled(Element))(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  display: inline-block;\n  line-height: 1;\n  vertical-align: baseline;\n  margin: 0 0.14285714em;\n  background-color: #e8e8e8;\n  background-image: none;\n  padding: 0.5833em 0.833em;\n  color: rgba(0, 0, 0, 0.6);\n  text-transform: none;\n  font-weight: 700;\n  border: 0 solid transparent;\n  border-radius: 0.28571429rem;\n  -webkit-transition: background 0.1s ease;\n  transition: background 0.1s ease;\n\n  font-size: 0.8em;\n  color: #fff;\n\n  ", "\n\n  ", "\n\n  ", "\n"], ["\n  display: inline-block;\n  line-height: 1;\n  vertical-align: baseline;\n  margin: 0 0.14285714em;\n  background-color: #e8e8e8;\n  background-image: none;\n  padding: 0.5833em 0.833em;\n  color: rgba(0, 0, 0, 0.6);\n  text-transform: none;\n  font-weight: 700;\n  border: 0 solid transparent;\n  border-radius: 0.28571429rem;\n  -webkit-transition: background 0.1s ease;\n  transition: background 0.1s ease;\n\n  font-size: 0.8em;\n  color: #fff;\n\n  ",
+export var StyledBadge = withProps()(styled(Element))(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  display: inline-block;\n  line-height: 1;\n  vertical-align: baseline;\n  margin: 0 0.14285714em;\n  background-color: #e8e8e8;\n  background-image: none;\n  padding: 0.5833em 0.833em;\n  color: rgba(0, 0, 0, 0.6);\n  text-transform: none;\n  font-weight: 700;\n  border: 0 solid transparent;\n  border-radius: 0.28571429rem;\n  -webkit-transition: background 0.1s ease;\n  transition: background 0.1s ease;\n\n  font-size: 0.8em;\n  color: #fff;\n\n  ", "\n\n  ", "\n\n  ", "\n"], ["\n  display: inline-block;\n  line-height: 1;\n  vertical-align: baseline;\n  margin: 0 0.14285714em;\n  background-color: #e8e8e8;\n  background-image: none;\n  padding: 0.5833em 0.833em;\n  color: rgba(0, 0, 0, 0.6);\n  text-transform: none;\n  font-weight: 700;\n  border: 0 solid transparent;\n  border-radius: 0.28571429rem;\n  -webkit-transition: background 0.1s ease;\n  transition: background 0.1s ease;\n\n  font-size: 0.8em;\n  color: #fff;\n\n  ",
     "\n\n  ",
     "\n\n  ",
     "\n"])), function (_a) {

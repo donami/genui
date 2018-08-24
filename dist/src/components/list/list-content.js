@@ -13,12 +13,12 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 import React from 'react';
 import styled from '../../styled/styled-components';
-var ListContent = function (_a) {
+export var ListContent = function (_a) {
     var children = _a.children, className = _a.className, rest = __rest(_a, ["children", "className"]);
     var classes = className + " g-list-content";
     return React.createElement("div", { className: classes }, children);
 };
-var StyledListContent = styled(ListContent)(templateObject_1 || (templateObject_1 = __makeTemplateObject([""], [""])));
+export var StyledListContent = styled(ListContent)(templateObject_1 || (templateObject_1 = __makeTemplateObject([""], [""])));
 export default StyledListContent;
 var templateObject_1;
 //# sourceMappingURL=list-content.js.map

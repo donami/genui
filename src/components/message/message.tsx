@@ -3,7 +3,7 @@ import React from 'react';
 import styled, { withProps, css } from '../../styled/styled-components';
 import MessageHeader from './message-header';
 
-type Props = {
+export type Props = {
   negative?: boolean;
   positive?: boolean;
   warning?: boolean;

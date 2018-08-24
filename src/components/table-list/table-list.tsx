@@ -6,19 +6,23 @@ export type TableItem = {
   [key: string]: any;
 };
 
-export interface TableProps {
+export interface Props {
   headings: string[];
   items: TableItem[];
 }
 
-class Table extends React.Component<TableProps> {
+class TableList extends React.Component<Props> {
   render() {
     const { headings, items } = this.props;
 
     return (
       <StyledTable>
         <thead>
-          <tr>{headings.map(heading => <th key={heading}>{heading}</th>)}</tr>
+          <tr>
+            {headings.map(heading => (
+              <th key={heading}>{heading}</th>
+            ))}
+          </tr>
         </thead>
         <tbody>
           {items.map((item, index) => {
@@ -75,4 +79,4 @@ const StyledTable = styled.table`
   }
 `;
 
-export default Table;
+export default TableList;

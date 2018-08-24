@@ -28,15 +28,23 @@ var Input = /** @class */ (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.state = {
             dirty: false,
+            value: '',
+        };
+        _this.handleOnChange = function (e) {
+            console.log(e.target.value);
+            var value = e.target.value;
+            _this.setState({ value: value, dirty: true });
+            _this.props.onValueChange && _this.props.onValueChange(value);
+            _this.props.onChange && _this.props.onChange(e);
         };
         return _this;
     }
     Input.prototype.render = function () {
-        return React.createElement(StyledInput, __assign({}, this.props));
+        return React.createElement(StyledInput, __assign({}, this.props, { onChange: this.handleOnChange }));
     };
     return Input;
 }(React.Component));
-var StyledInput = styled.input(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  margin: 0;\n  max-width: 100%;\n  outline: 0;\n  text-align: left;\n  line-height: 1.2em;\n  padding: 0.67em 1em;\n  background: #fff;\n  border: 1px solid rgba(34, 36, 38, 0.15);\n  color: rgba(0, 0, 0, 0.87);\n  border-radius: 0.28571429rem;\n  -webkit-transition: border-color 0.1s ease, -webkit-box-shadow 0.1s ease;\n  transition: border-color 0.1s ease, -webkit-box-shadow 0.1s ease;\n  transition: box-shadow 0.1s ease, border-color 0.1s ease;\n  transition: box-shadow 0.1s ease, border-color 0.1s ease,\n    -webkit-box-shadow 0.1s ease;\n  -webkit-box-shadow: none;\n  box-shadow: none;\n  font-family: inherit;\n\n  box-sizing: border-box;\n\n  &:focus {\n    border-color: #85b7d9;\n    background: #fff;\n    color: rgba(0, 0, 0, 0.8);\n    -webkit-box-shadow: none;\n    box-shadow: none;\n  }\n"], ["\n  margin: 0;\n  max-width: 100%;\n  outline: 0;\n  text-align: left;\n  line-height: 1.2em;\n  padding: 0.67em 1em;\n  background: #fff;\n  border: 1px solid rgba(34, 36, 38, 0.15);\n  color: rgba(0, 0, 0, 0.87);\n  border-radius: 0.28571429rem;\n  -webkit-transition: border-color 0.1s ease, -webkit-box-shadow 0.1s ease;\n  transition: border-color 0.1s ease, -webkit-box-shadow 0.1s ease;\n  transition: box-shadow 0.1s ease, border-color 0.1s ease;\n  transition: box-shadow 0.1s ease, border-color 0.1s ease,\n    -webkit-box-shadow 0.1s ease;\n  -webkit-box-shadow: none;\n  box-shadow: none;\n  font-family: inherit;\n\n  box-sizing: border-box;\n\n  &:focus {\n    border-color: #85b7d9;\n    background: #fff;\n    color: rgba(0, 0, 0, 0.8);\n    -webkit-box-shadow: none;\n    box-shadow: none;\n  }\n"])));
+export var StyledInput = styled.input(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  margin: 0;\n  max-width: 100%;\n  outline: 0;\n  text-align: left;\n  line-height: 1.2em;\n  padding: 0.67em 1em;\n  background: #fff;\n  border: 1px solid rgba(34, 36, 38, 0.15);\n  color: rgba(0, 0, 0, 0.87);\n  border-radius: 0.28571429rem;\n  -webkit-transition: border-color 0.1s ease, -webkit-box-shadow 0.1s ease;\n  transition: border-color 0.1s ease, -webkit-box-shadow 0.1s ease;\n  transition: box-shadow 0.1s ease, border-color 0.1s ease;\n  transition: box-shadow 0.1s ease, border-color 0.1s ease,\n    -webkit-box-shadow 0.1s ease;\n  -webkit-box-shadow: none;\n  box-shadow: none;\n  font-family: inherit;\n\n  box-sizing: border-box;\n\n  &:focus {\n    border-color: #85b7d9;\n    background: #fff;\n    color: rgba(0, 0, 0, 0.8);\n    -webkit-box-shadow: none;\n    box-shadow: none;\n  }\n"], ["\n  margin: 0;\n  max-width: 100%;\n  outline: 0;\n  text-align: left;\n  line-height: 1.2em;\n  padding: 0.67em 1em;\n  background: #fff;\n  border: 1px solid rgba(34, 36, 38, 0.15);\n  color: rgba(0, 0, 0, 0.87);\n  border-radius: 0.28571429rem;\n  -webkit-transition: border-color 0.1s ease, -webkit-box-shadow 0.1s ease;\n  transition: border-color 0.1s ease, -webkit-box-shadow 0.1s ease;\n  transition: box-shadow 0.1s ease, border-color 0.1s ease;\n  transition: box-shadow 0.1s ease, border-color 0.1s ease,\n    -webkit-box-shadow 0.1s ease;\n  -webkit-box-shadow: none;\n  box-shadow: none;\n  font-family: inherit;\n\n  box-sizing: border-box;\n\n  &:focus {\n    border-color: #85b7d9;\n    background: #fff;\n    color: rgba(0, 0, 0, 0.8);\n    -webkit-box-shadow: none;\n    box-shadow: none;\n  }\n"])));
 export default Input;
 var templateObject_1;
 //# sourceMappingURL=input.js.map

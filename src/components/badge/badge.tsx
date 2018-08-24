@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css, withProps } from '../../styled/styled-components';
 
-type Props = {
+export type Props = {
   color?: keyof typeof colors;
   size?: keyof typeof sizes;
   circular?: boolean;
@@ -10,7 +10,7 @@ type Props = {
   to?: string;
 };
 
-const sizes = {
+export const sizes = {
   mini: 0.5,
   tiny: 0.6,
   small: 0.7,
@@ -21,7 +21,7 @@ const sizes = {
   massive: 1.6,
 };
 
-const colors = {
+export const colors = {
   red: '#db2828',
   orange: '#f2711c',
   yellow: '#fbbd08',
@@ -58,7 +58,7 @@ const Element: React.SFC<Props> = ({
   return React.createElement(type, injectedProps, children);
 };
 
-const StyledBadge = withProps<Props>()(styled(Element))`
+export const StyledBadge = withProps<Props>()(styled(Element))`
   display: inline-block;
   line-height: 1;
   vertical-align: baseline;

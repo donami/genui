@@ -29,6 +29,13 @@ var Dropdown = /** @class */ (function (_super) {
         _this.state = {
             active: false,
         };
+        _this.handleClick = function (e) {
+            // If click is inside node, return
+            if (!_this.node || _this.node.contains(e.target)) {
+                return;
+            }
+            _this.setState({ active: false });
+        };
         _this.handleToggle = function () {
             _this.setState({ active: !_this.state.active });
         };
@@ -37,7 +44,14 @@ var Dropdown = /** @class */ (function (_super) {
         };
         return _this;
     }
+    Dropdown.prototype.componentWillMount = function () {
+        document.addEventListener('mousedown', this.handleClick, false);
+    };
+    Dropdown.prototype.componentWillUnmount = function () {
+        document.addEventListener('mousedown', this.handleClick, false);
+    };
     Dropdown.prototype.render = function () {
+        var _this = this;
         var items = this.renderItems();
         var _a = this.props, children = _a.children, className = _a.className;
         var injectedProps = {};
@@ -47,7 +61,7 @@ var Dropdown = /** @class */ (function (_super) {
         else {
             injectedProps.className = 'g-dropdown';
         }
-        return (React.createElement(Container, __assign({}, injectedProps),
+        return (React.createElement(Container, __assign({ innerRef: function (node) { return (_this.node = node); } }, injectedProps),
             React.createElement(Text, { onClick: this.handleToggle, className: "g-dropdown-text" }, children),
             React.createElement(Menu, { active: this.state.active, className: "g-dropdown-menu" }, items.map(function (item, index) { return (React.createElement(Item, { key: index, className: "g-dropdown-menu-item" }, item)); }))));
     };

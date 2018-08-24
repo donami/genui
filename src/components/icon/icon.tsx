@@ -25,11 +25,13 @@ export interface IconProps {
   size?: string;
   color?: string;
   className?: string;
+  fixedWidth?: boolean;
 }
 
-const Icon: React.StatelessComponent<IconProps> = ({
+const Icon: React.SFC<IconProps> = ({
   name,
   size,
+  fixedWidth,
   className,
   ...other
 }) => {
@@ -51,6 +53,10 @@ const Icon: React.StatelessComponent<IconProps> = ({
   const classes = className ? className.split(' ') : [];
 
   classes.push(name);
+
+  if (fixedWidth) {
+    classes.push('fa-fw');
+  }
 
   if (size && sizeClasses[size]) {
     classes.push(sizeClasses[size]);

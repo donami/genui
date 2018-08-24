@@ -2,19 +2,37 @@ import * as React from 'react';
 
 import styled, { css, withProps } from '../../styled/styled-components';
 
-type Props = {
+export type Props = {
   renderItem: (item: any) => any;
   items: any[];
   className?: string;
 };
 
-type State = {
+export type State = {
   active: boolean;
 };
 
 class Dropdown extends React.Component<Props, State> {
   state: State = {
     active: false,
+  };
+  node: HTMLElement | null;
+
+  componentWillMount() {
+    document.addEventListener('mousedown', this.handleClick, false);
+  }
+
+  componentWillUnmount() {
+    document.addEventListener('mousedown', this.handleClick, false);
+  }
+
+  handleClick = (e: any) => {
+    // If click is inside node, return
+    if (!this.node || this.node.contains(e.target)) {
+      return;
+    }
+
+    this.setState({ active: false });
   };
 
   handleToggle = () => {
@@ -38,7 +56,7 @@ class Dropdown extends React.Component<Props, State> {
     }
 
     return (
-      <Container {...injectedProps}>
+      <Container innerRef={node => (this.node = node)} {...injectedProps}>
         <Text onClick={this.handleToggle} className="g-dropdown-text">
           {children}
         </Text>

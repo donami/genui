@@ -165,7 +165,7 @@ const Button: React.SFC<Props> = ({
   return <button {...injectedProps}>{content}</button>;
 };
 
-const StyledButton = styled(Button)`
+export const StyledButton = styled(Button)`
   font-size: 0.8rem;
   cursor: pointer;
   display: inline-block;
