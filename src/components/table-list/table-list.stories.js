@@ -1,12 +1,12 @@
 import React from 'react';
 
 import { storiesOf } from '@storybook/react';
-import Table from './table';
+import TableList from './table-list';
 import { wInfo } from '../../../utils';
 import { text, boolean } from '@storybook/addon-knobs/react';
 
-storiesOf('Components/Table', module).addWithJSX(
-  'basic Table',
+storiesOf('Components/TableList', module).addWithJSX(
+  'basic Table List',
   wInfo(`
 
   ### Notes
@@ -23,7 +23,7 @@ storiesOf('Components/Table', module).addWithJSX(
     },
   ];
 
-  <Table 
+  <TableList
     headings={['ID', 'Period End', 'Status']} 
     items={timesheets}
   />
@@ -37,7 +37,7 @@ storiesOf('Components/Table', module).addWithJSX(
     ];
 
     return (
-      <Table headings={['ID', 'Period End', 'Status']} items={timesheets} />
+      <TableList headings={['ID', 'Period End', 'Status']} items={timesheets} />
     );
   })
 );

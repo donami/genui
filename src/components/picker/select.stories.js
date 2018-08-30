@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { text, boolean } from '@storybook/addon-knobs/react';
 
-import Select from './select';
+import Picker from './picker';
 import { wInfo } from '../../../utils';
 
 const items = [
@@ -24,16 +24,16 @@ const items = [
   },
 ];
 
-storiesOf('Components/Select', module).addWithJSX(
-  'basic Select',
+storiesOf('Components/Picker', module).addWithJSX(
+  'basic Picker',
   wInfo(`
 
   ### Notes
 
-  This is a standard <Select />
+  This is a standard <Picker />
 
   ### Usage
   ~~~js
-  <Select name="fas fa-adjust" />
-  ~~~`)(() => <Select items={items} />)
+  <Picker items={items} />
+  ~~~`)(() => <Picker items={items} />)
 );

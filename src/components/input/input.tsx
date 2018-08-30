@@ -5,6 +5,7 @@ import styled from '../../styled/styled-components';
 export type Props = {
   onValueChange?(value: string): any;
   onChange?: any;
+  placeholder?: string;
 };
 
 export type State = Readonly<{

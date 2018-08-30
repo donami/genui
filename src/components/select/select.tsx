@@ -1,438 +1,306 @@
-import * as React from 'react';
-import { Transition } from 'react-transition-group';
-
+import React, { Component } from 'react';
 import styled, { withProps, css } from '../../styled/styled-components';
-import Icon from '../icon';
 
-export interface SelectItem {
-  value: string;
-  label: string;
-}
+type SelectItem = { value: any; label: string };
 
-export interface SelectProps {
-  items: SelectItem[];
+type Props = {
+  options: SelectItem[];
   name?: string;
-  defaultSelected?: SelectItem[];
+  onChange?: any;
   placeholder?: string;
-  onChange?: (selected: SelectItem[]) => any;
-}
+  value?: string;
+};
 
-export interface SelectState {
-  selected: SelectItem[];
-  expanded: boolean;
-  dirty: boolean;
-  filter: string;
-  active: boolean;
-}
+type State = Readonly<{
+  open: boolean;
+  selected: SelectItem | null;
+}>;
 
-class Select extends React.Component<SelectProps, SelectState> {
-  state: SelectState = {
-    selected: [],
-    active: false,
-    filter: '',
-    expanded: false,
-    dirty: false,
-  };
+const initialState: State = { open: false, selected: null };
 
-  private inputElem: HTMLInputElement;
+class Select extends Component<Props, State> {
+  readonly state = initialState;
+
+  selectElem: HTMLSelectElement | null;
+  node: HTMLElement | null;
 
   componentWillMount() {
-    if (this.props.defaultSelected && !this.state.dirty) {
-      this.setState({
-        selected: this.props.defaultSelected,
-      });
-    }
-  }
-
-  componentDidMount() {
-    document.body.addEventListener('click', this.clickListener, false);
+    document.addEventListener('mousedown', this.handleClick, false);
   }
 
   componentWillUnmount() {
-    document.body.removeEventListener('click', this.clickListener, false);
+    document.addEventListener('mousedown', this.handleClick, false);
   }
 
-  componentWillReceiveProps(nextProps: any) {
-    if (nextProps.defaultSelected && !this.state.dirty) {
-      this.setState({
-        selected: nextProps.defaultSelected,
+  componentWillReceiveProps(nextProps: Props) {
+    if (nextProps.value) {
+      const item = nextProps.options.find(option => {
+        if (!nextProps.value) {
+          return false;
+        }
+        return option.value.toString() === nextProps.value.toString();
       });
+
+      if (!item) {
+        return;
+      }
+
+      if (!this.state.selected || this.state.selected.value !== item.value) {
+        this.setState({ selected: item });
+        this.props.onChange && this.props.onChange(item.value.toString());
+
+        if (this.selectElem) {
+          this.selectElem.value = item.value.toString();
+        }
+      }
     }
   }
 
-  clickListener = (event: any) => {
-    if (
-      event.target.classList.contains('menu-item') ||
-      event.target.classList.contains('select-input')
-    ) {
+  handleClick = (e: any) => {
+    // If click is inside node, return
+    if (!this.node || this.node.contains(e.target)) {
       return;
     }
 
-    if (this.state.expanded) {
-      this.setState({
-        expanded: false,
-      });
-    }
+    this.setState({ open: false });
   };
 
-  handleSelect = (item: SelectItem) => {
-    const { selected } = this.state;
+  selectItem = (item: SelectItem) => {
+    this.setState({ selected: item, open: false });
 
-    const indexOf = selected
-      .map((item: SelectItem) => item.value)
-      .indexOf(item.value);
+    if (this.selectElem) {
+      this.selectElem.value = item.value.toString();
 
-    const newState: any = {};
-
-    // If item already is selected, it should be de-selected
-    if (indexOf > -1) {
-      newState.selected = [
-        ...this.state.selected.slice(0, indexOf),
-        ...this.state.selected.slice(indexOf + 1),
-      ];
-    } else {
-      // Add item value to selected
-      newState.selected = [...this.state.selected, item];
+      this.props.onChange && this.props.onChange(item.value.toString());
     }
-
-    this.setState(
-      {
-        ...this.state,
-        ...newState,
-        dirty: true,
-        filter: '',
-      },
-      () => {
-        this.props.onChange && this.props.onChange(this.state.selected);
-      }
-    );
-
-    this.inputElem.value = '';
-    this.inputElem.focus();
-  };
-
-  handleExpand(show: boolean): void {
-    this.setState({ expanded: show });
-  }
-
-  handleInputChange = () => {
-    this.setState({ filter: this.inputElem.value });
-  };
-
-  searchFilter = (item: SelectItem) => {
-    if (!this.state.filter.length) {
-      return true;
-    }
-
-    return (
-      item.label.toLowerCase().indexOf(this.state.filter.toLowerCase()) > -1
-    );
   };
 
   render() {
-    const { expanded, selected, filter, active } = this.state;
-    const { items, placeholder } = this.props;
+    const { options, placeholder } = this.props;
+    const { open, selected } = this.state;
 
-    const filteredItems = items.filter(this.searchFilter);
+    const defaultOpenText = placeholder || 'Select value';
 
     return (
       <Container
-        expanded={expanded}
-        active={active}
+        innerRef={node => (this.node = node)}
+        open={open}
+        onClick={() => this.setState({ open: !open })}
         className="select-container"
       >
-        {selected.map(item => (
-          <Label
-            key={item.value}
-            onClick={() => this.handleSelect(item)}
-            className="label"
-          >
-            {item.label} <Icon name="fas fa-times" />
-          </Label>
-        ))}
+        <Text hasSelectedItem={selected !== null} className="select-label">
+          {selected ? selected.label : defaultOpenText}
+        </Text>
+        <DropdownIcon className="fas fa-caret-down" />
 
-        <Input
-          type="text"
-          className="select-input"
-          innerRef={(value: any) => {
-            this.inputElem = value;
-          }}
-          onChange={this.handleInputChange}
-          onFocus={() => {
-            this.handleExpand(true);
-            this.setState({ active: true });
-          }}
-          onBlur={() => {
-            this.setState({ active: false });
-          }}
-        />
-
-        {!selected.length &&
-          !filter.length && (
-            <Text
-              active={active}
-              className="default-text"
-              onClick={() => {
-                this.inputElem.focus();
-              }}
+        <Options open={open} className="select-options">
+          {options.map(option => (
+            <Option
+              key={option.value}
+              selected={selected ? selected.value === option.value : false}
+              onClick={() => this.selectItem(option)}
             >
-              {placeholder ? (
-                <React.Fragment>{placeholder}</React.Fragment>
-              ) : (
-                <React.Fragment>Filter...</React.Fragment>
-              )}
-            </Text>
-          )}
+              {option.label}
+            </Option>
+          ))}
+        </Options>
 
-        <HiddenSelect
-          name={this.props.name || ''}
-          multiple
-          onChange={() => {}}
-          value={this.state.selected.map((item: SelectItem) => item.value)}
+        <select
+          ref={element => {
+            this.selectElem = element;
+          }}
         >
-          {items.map((item, index) => (
-            <option value={item.value} key={index}>
-              {item.label}
+          {options.map(option => (
+            <option key={option.value} value={option.value}>
+              {option.label}
             </option>
           ))}
-        </HiddenSelect>
-
-        <Transition in={expanded} timeout={500}>
-          {(state: any) => (
-            <Menu
-              expanded={expanded}
-              active={active}
-              transitionState={state}
-              className="menu"
-            >
-              {!filteredItems.length && (
-                <NoResults>No results found.</NoResults>
-              )}
-              {filteredItems.map((item, index) => (
-                <MenuItem
-                  selected={
-                    selected.map(item => item.value).indexOf(item.value) > -1
-                  }
-                  key={index}
-                  className="menu-item"
-                  onClick={() => this.handleSelect(item)}
-                >
-                  {item.label}
-                </MenuItem>
-              ))}
-            </Menu>
-          )}
-        </Transition>
+        </select>
       </Container>
     );
   }
 }
 
-const Container = withProps<{ expanded: boolean; active: boolean }>()(
-  styled.div
-)`
-  font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
-  font-size: 1rem;
-  position: relative;
-  border: 1px solid rgba(34, 36, 38, 0.15);
-  border-radius: 5px;
-  margin-bottom: 10px;
-  height: 30px;
+export default Select;
 
-  ${props => {
-    if (props.expanded) {
-      return `
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-      `;
-    }
-    return null;
-  }}
-  ${props => {
-    if (props.active) {
-      return `
-        border-color: #96c8da;
-        -webkit-box-shadow: 0 2px 3px 0 rgba(34,36,38,.15);
-        box-shadow: 0 2px 3px 0 rgba(34,36,38,.15);
-      `;
-    }
-    return `
-      &:hover {
-        border-color: rgba(34, 36, 38, .35);
-      }
-    `;
-  }}
-`;
-
-const Label = styled.a`
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  display: inline-block;
-  vertical-align: middle;
-  white-space: normal;
-  font-size: 0.7rem;
-  padding: 0.5em 0.8em;
-  margin: 0.14285714rem 0.28571429rem 0.14285714rem 0;
-  -webkit-box-shadow: 0 0 0 1px rgba(34, 36, 38, 0.15) inset;
-  box-shadow: 0 0 0 1px rgba(34, 36, 38, 0.15) inset;
+const Container = withProps<{ open: boolean }>()(styled.div)`
   cursor: pointer;
-  -webkit-transition: background 0.1s ease;
-  transition: background 0.1s ease;
-  color: rgba(0, 0, 0, 0.6);
-  text-transform: none;
-  border: 0 solid transparent;
-  border-radius: 0.28571429rem;
-  background-color: #e8e8e8;
-  line-height: 1;
+  position: relative;
+  display: inline-block;
+  outline: 0;
+  text-align: left;
+  -webkit-transition: width 0.1s ease, -webkit-box-shadow 0.1s ease;
+  transition: width 0.1s ease, -webkit-box-shadow 0.1s ease;
+  transition: box-shadow 0.1s ease, width 0.1s ease;
+  transition: box-shadow 0.1s ease, width 0.1s ease,
+    -webkit-box-shadow 0.1s ease;
+  -webkit-tap-highlight-color: transparent;
 
-  &:first-of-type {
-    margin-left: 5px;
-  }
-`;
-
-const Input = styled.input`
-  position: static;
-  top: 0;
-  left: 0;
-  border: 0;
-  outline: none;
-
-  margin-left: 10px;
-  line-height: 100%;
+  word-wrap: break-word;
+  line-height: 1em;
+  white-space: normal;
+  -webkit-transform: rotateZ(0);
+  transform: rotateZ(0);
+  min-width: 14em;
   background: #fff;
-  height: calc(100% - 2px);
-`;
-
-const NoResults = styled.div`
-  padding: 0.78571429rem 1.14285714rem !important;
-  color: rgba(0, 0, 0, 0.4);
-  font-size: 0.8rem;
-`;
-
-const Text = withProps<{ active: boolean }>()(styled.div)`
-  cursor: text;
-  position: absolute;
-  top: 0;
-  left: 10px;
-  color: rgba(191, 191, 191, 0.87);
-  height: 30px;
-  line-height: 30px;
-  font-size: 0.8rem;
-
-  ${props => {
-    if (props.active) {
-      return `
-        color: rgba(115, 115, 115, .87);
-      `;
-    }
-    return ``;
-  }}
-`;
-
-const Menu = withProps<{
-  expanded: boolean;
-  active: boolean;
-  transitionState: any;
-}>()(styled.div)`
-  position: absolute;
-  background: #fff;
-  width: 100%;
+  padding: 0.78571429em 2.1em 0.78571429em 1em;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-box-shadow: none;
+  box-shadow: none;
   border: 1px solid rgba(34, 36, 38, 0.15);
-  border-radius: 5px;
-  border-top: 0;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  left: -1px;
-  margin-top: 1px;
-  max-height: 0px;
-  overflow: hidden;
+  border-radius: 0.28571429rem;
 
-  ${({ expanded }) =>
-    expanded &&
-    css`
-      border: none;
-    `}
+  &:hover {
+    border-color: rgba(34, 36, 38, 0.35);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
 
-  ${({ transitionState }) => {
-    if (transitionState === 'entering') {
-      return css`
-        opacity: 1;
-        transition: max-height 0.3s ease-in;
-      `;
-    }
-    if (transitionState === 'entered') {
-      return css`
-        max-height: 1000px;
-        opacity: 1;
-        transition: max-height 0.3s ease-in;
-      `;
-    }
-    if (transitionState === 'exiting') {
-      return css`
-        max-height: 0;
-        transition: max-height 0.3s ease-out;
-      `;
-    }
-    if (transitionState === 'exited') {
-      return css`
-        max-height: 0;
-        transition: max-height 0.3s ease-out;
-        border: none;
-      `;
-    }
-    return null;
-  }}
-  
-  ${({ active }) =>
-    active &&
+  &:focus {
+    border-color: #96c8da;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+  select {
+    display: none;
+  }
+
+  ${({ open }) =>
+    open &&
     css`
       border-color: #96c8da;
       -webkit-box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
       box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+      border-bottom-left-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+      z-index: 12;
+
+      &:hover {
+        border-color: #96c8da;
+        -webkit-box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+        box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+      }
+    `};
+`;
+
+const Text = withProps<{ hasSelectedItem: boolean }>()(styled.div)`
+  display: inline-block;
+  -webkit-transition: none;
+  transition: none;
+
+  ${({ hasSelectedItem }) =>
+    !hasSelectedItem &&
+    css`
+      color: rgba(191, 191, 191, 0.87);
     `}
 `;
 
-const MenuItem = withProps<{ selected: boolean }>()(styled.a)`
+const DropdownIcon = styled.i`
+  display: inline-block;
+  text-decoration: inherit;
+
+  font-size: 0.85714286em;
+
+  font-style: normal;
+  text-align: center;
+
+  cursor: pointer;
+  position: absolute;
+  width: auto;
+  height: auto;
+  line-height: 1.21428571em;
+  top: 0.78571429em;
+  right: 1em;
+  margin: -0.78571429em;
+  padding: 0.91666667em;
+  opacity: 0.8;
+  -webkit-transition: opacity 0.1s ease;
+  transition: opacity 0.1s ease;
+`;
+
+const Options = withProps<{ open: boolean }>()(styled.div)`
+  ${({ open }) =>
+    !open &&
+    css`
+      display: none;
+    `}
+
+  cursor: auto;
+  position: absolute;
+  outline: 0;
+  top: 100%;
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+  margin: 0;
+  padding: 0 0;
+  background: #fff;
+  font-size: 1em;
+  text-shadow: none;
+  text-align: left;
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  -webkit-transition: opacity 0.1s ease;
+  transition: opacity 0.1s ease;
+  will-change: transform, opacity;
+
+  left: 0;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-overflow-scrolling: touch;
+  border-top-width: 0 !important;
+  width: auto;
+  outline: 0;
+  margin: 0 -1px;
+  min-width: 100%;
+  width: 100%;
+  border-radius: 0 0 0.28571429rem 0.28571429rem;
+  -webkit-transition: opacity 0.1s ease;
+  transition: opacity 0.1s ease;
+
+  max-height: 8.01428571rem;
+
+  border-color: #96c8da;
+  -webkit-box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+  box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+`;
+
+const Option = withProps<{ selected: boolean }>()(styled.div)`
+  position: relative;
+  cursor: pointer;
+  display: block;
   border: none;
   height: auto;
   text-align: left;
   line-height: 1em;
-  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 1em;
   text-transform: none;
   font-weight: 400;
+  -webkit-box-shadow: none;
   box-shadow: none;
+  -webkit-touch-callout: none;
+
   border-top: 1px solid #fafafa;
+  padding: 0.78571429rem 1.14285714rem !important;
   white-space: normal;
   word-wrap: normal;
-  padding: .78571429rem 1.14285714rem !important;
-  display: block;
-  cursor: pointer;
-  color: rgba(0, 0, 0, .87);
+
+  pointer-events: all;
 
   &:hover {
-    background: rgba(0,0,0,.05);
-    color: rgba(0,0,0,.95);
+    background: rgba(0, 0, 0, 0.05);
+    color: rgba(0, 0, 0, 0.95);
   }
 
-  &:first-of-type {
-    border-top: none;
-  }
-
-  ${props => {
-    if (props.selected) {
-      return `
-        background: rgba(0,0,0,.03);
-        color: rgba(0,0,0,.95);
-      `;
-    }
-    return ``;
-  }}
+  ${({ selected }) =>
+    selected &&
+    css`
+      background: rgba(0, 0, 0, 0.03);
+      color: rgba(0, 0, 0, 0.95);
+      font-weight: 700;
+    `}
 `;
-
-const HiddenSelect = styled.select`
-  display: none !important;
-`;
-
-export default Select;

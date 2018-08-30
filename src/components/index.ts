@@ -1,4 +1,5 @@
 export { default as TableList } from './table-list';
+export { default as Table, TableBuilder } from './table';
 export { default as Box } from './box';
 export { default as Label } from './label';
 export { default as Button } from './button';
@@ -11,5 +12,6 @@ export { default as StatusColor } from './status-color';
 export { default as Badge } from './badge';
 export { default as List } from './list';
 export { default as Message } from './message';
-export { default as Select, SelectItem } from './select';
+export { default as Picker, PickerItem } from './picker';
+export { default as Select } from './select';
 export { Field } from './form';

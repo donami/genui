@@ -31,7 +31,6 @@ var Input = /** @class */ (function (_super) {
             value: '',
         };
         _this.handleOnChange = function (e) {
-            console.log(e.target.value);
             var value = e.target.value;
             _this.setState({ value: value, dirty: true });
             _this.props.onValueChange && _this.props.onValueChange(value);
