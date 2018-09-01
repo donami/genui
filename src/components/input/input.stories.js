@@ -5,9 +5,10 @@ import { text, boolean } from '@storybook/addon-knobs/react';
 import Input from './input';
 import { wInfo } from '../../../utils';
 
-storiesOf('Components/Input', module).addWithJSX(
-  'basic Input',
-  wInfo(`
+storiesOf('Components/Input', module)
+  .addWithJSX(
+    'basic Input',
+    wInfo(`
 
   ### Notes
 
@@ -17,4 +18,17 @@ storiesOf('Components/Input', module).addWithJSX(
   ~~~js
   <Input />
   ~~~`)(() => <Input placeholder="hello" />)
-);
+  )
+  .addWithJSX(
+    'multiline Input',
+    wInfo(`
+
+  ### Notes
+
+  This is a multiline <Input />
+
+  ### Usage
+  ~~~js
+  <Input multiline/>
+  ~~~`)(() => <Input placeholder="hello" multiline />)
+  );
