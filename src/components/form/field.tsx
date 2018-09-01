@@ -23,7 +23,8 @@ const Container = styled.div`
     text-transform: none;
   }
 
-  > input {
+  > input,
+  > textarea {
     width: 100%;
   }
 `;
