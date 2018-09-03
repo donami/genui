@@ -25,6 +25,6 @@ var Field = /** @class */ (function (_super) {
     return Field;
 }(React.Component));
 export default Field;
-var Container = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  margin-bottom: 20px;\n\n  > label {\n    display: block;\n    margin: 0 0 0.28571429rem 0;\n    color: rgba(0, 0, 0, 0.87);\n    font-size: 0.92857143em;\n    font-weight: 700;\n    text-transform: none;\n  }\n\n  > input {\n    width: 100%;\n  }\n"], ["\n  margin-bottom: 20px;\n\n  > label {\n    display: block;\n    margin: 0 0 0.28571429rem 0;\n    color: rgba(0, 0, 0, 0.87);\n    font-size: 0.92857143em;\n    font-weight: 700;\n    text-transform: none;\n  }\n\n  > input {\n    width: 100%;\n  }\n"])));
+var Container = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  margin-bottom: 20px;\n\n  > label {\n    display: block;\n    margin: 0 0 0.28571429rem 0;\n    color: rgba(0, 0, 0, 0.87);\n    font-size: 0.92857143em;\n    font-weight: 700;\n    text-transform: none;\n  }\n\n  > input,\n  > textarea {\n    width: 100%;\n  }\n"], ["\n  margin-bottom: 20px;\n\n  > label {\n    display: block;\n    margin: 0 0 0.28571429rem 0;\n    color: rgba(0, 0, 0, 0.87);\n    font-size: 0.92857143em;\n    font-weight: 700;\n    text-transform: none;\n  }\n\n  > input,\n  > textarea {\n    width: 100%;\n  }\n"])));
 var templateObject_1;
 //# sourceMappingURL=field.js.map
