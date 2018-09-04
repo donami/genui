@@ -26,7 +26,10 @@ class List extends Component<Props> {
       divided: divided ? 1 : 0,
     };
 
-    const filteredChildren = (children as any).filter((child: any) => child);
+    let filteredChildren = children;
+    if (Array.isArray(children)) {
+      filteredChildren = (children as any).filter((child: any) => child);
+    }
 
     const childrenWithProps = React.Children.map(
       filteredChildren,
