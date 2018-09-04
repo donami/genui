@@ -46,7 +46,8 @@ var List = /** @class */ (function (_super) {
         var itemProps = {
             divided: divided ? 1 : 0,
         };
-        var childrenWithProps = React.Children.map(children, function (child) {
+        var filteredChildren = children.filter(function (child) { return child; });
+        var childrenWithProps = React.Children.map(filteredChildren, function (child) {
             return React.cloneElement(child, itemProps);
         });
         return (React.createElement("div", __assign({ className: classes }, rest), childrenWithProps));
