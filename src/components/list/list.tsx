@@ -26,9 +26,14 @@ class List extends Component<Props> {
       divided: divided ? 1 : 0,
     };
 
-    const childrenWithProps = React.Children.map(children, (child: any) => {
-      return React.cloneElement(child, itemProps);
-    });
+    const filteredChildren = (children as any).filter((child: any) => child);
+
+    const childrenWithProps = React.Children.map(
+      filteredChildren,
+      (child: any) => {
+        return React.cloneElement(child, itemProps);
+      }
+    );
 
     return (
       <div className={classes} {...rest}>
