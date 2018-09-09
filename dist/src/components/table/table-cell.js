@@ -24,6 +24,7 @@ import { Link } from 'react-router-dom';
 import Icon from '../icon/icon';
 import Dropdown from '../dropdown/dropdown';
 import styled, { withProps, css } from '../../styled/styled-components';
+import Confirm from '../confirm/confirm';
 var TableCell = function (_a) {
     var options = _a.options, option = _a.option, children = _a.children, rest = __rest(_a, ["options", "option", "children"]);
     if (options) {
@@ -41,6 +42,10 @@ var TableCell = function (_a) {
                 React.createElement(Icon, { name: "fas fa-ellipsis-h" }))));
     }
     if (option) {
+        if (option.confirm) {
+            return (React.createElement(Cell, __assign({}, rest),
+                React.createElement(Confirm, { header: option.confirm.header, trigger: option.confirm.trigger, content: option.confirm.content, onActionClick: option.confirm.onActionClick })));
+        }
         return (React.createElement(Cell, __assign({}, rest),
             option.to && (React.createElement(Link, { to: option.to, className: "table-cell-option" },
                 React.createElement(Icon, { name: option.icon }))),
