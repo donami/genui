@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Icon from '../icon/icon';
 import Dropdown from '../dropdown/dropdown';
 import styled, { withProps, css } from '../../styled/styled-components';
+import Confirm from '../confirm/confirm';
 
 type DropdownItem = {
   label: string;
@@ -21,6 +22,8 @@ type Props = {
     onClick?: any;
     to?: string;
     confirm?: {
+      header?: string;
+      content?: string;
       trigger: JSX.Element;
       onActionClick(e: React.MouseEvent<HTMLElement>, actionProps: any): any;
     };
@@ -65,7 +68,16 @@ const TableCell: React.SFC<Props> = ({
 
   if (option) {
     if (option.confirm) {
-      return <Cell {...rest} />;
+      return (
+        <Cell {...rest}>
+          <Confirm
+            header={option.confirm.header}
+            trigger={option.confirm.trigger}
+            content={option.confirm.content}
+            onActionClick={option.confirm.onActionClick}
+          />
+        </Cell>
+      );
     }
 
     return (
