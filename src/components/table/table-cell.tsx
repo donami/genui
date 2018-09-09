@@ -70,12 +70,14 @@ const TableCell: React.SFC<Props> = ({
     if (option.confirm) {
       return (
         <Cell {...rest}>
-          <Confirm
-            header={option.confirm.header}
-            trigger={option.confirm.trigger}
-            content={option.confirm.content}
-            onActionClick={option.confirm.onActionClick}
-          />
+          <div className="table-cell-option">
+            <Confirm
+              header={option.confirm.header}
+              trigger={option.confirm.trigger}
+              content={option.confirm.content}
+              onActionClick={option.confirm.onActionClick}
+            />
+          </div>
         </Cell>
       );
     }
