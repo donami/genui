@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import Icon from '../icon/icon';
+import { withProps } from '../../styled/styled-components';
 
 const sizes = {
   mini: '0.78571429rem',
@@ -135,7 +136,7 @@ export interface Props {
   icon?: string;
   disabled?: boolean;
   circular?: boolean;
-  onClick?: () => void;
+  onClick?: any;
   children: any;
   to?: string;
 }

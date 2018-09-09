@@ -20,6 +20,10 @@ type Props = {
     icon: string;
     onClick?: any;
     to?: string;
+    confirm?: {
+      trigger: JSX.Element;
+      onActionClick(e: React.MouseEvent<HTMLElement>, actionProps: any): any;
+    };
   };
 };
 
@@ -60,6 +64,10 @@ const TableCell: React.SFC<Props> = ({
   }
 
   if (option) {
+    if (option.confirm) {
+      return <Cell {...rest} />;
+    }
+
     return (
       <Cell {...rest}>
         {option.to && (
