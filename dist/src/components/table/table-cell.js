@@ -44,7 +44,8 @@ var TableCell = function (_a) {
     if (option) {
         if (option.confirm) {
             return (React.createElement(Cell, __assign({}, rest),
-                React.createElement(Confirm, { header: option.confirm.header, trigger: option.confirm.trigger, content: option.confirm.content, onActionClick: option.confirm.onActionClick })));
+                React.createElement("div", { className: "table-cell-option" },
+                    React.createElement(Confirm, { header: option.confirm.header, trigger: option.confirm.trigger, content: option.confirm.content, onActionClick: option.confirm.onActionClick }))));
         }
         return (React.createElement(Cell, __assign({}, rest),
             option.to && (React.createElement(Link, { to: option.to, className: "table-cell-option" },
