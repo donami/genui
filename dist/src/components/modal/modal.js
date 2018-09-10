@@ -26,6 +26,7 @@ import ModalHeader from './modal-header';
 import ModalContent from './modal-content';
 import ModalActions from './modal-actions';
 import styled, { withProps, css } from '../../styled/styled-components';
+import { Transition } from 'react-transition-group';
 var initialState = {
     open: false,
 };
@@ -70,42 +71,52 @@ var Modal = /** @class */ (function (_super) {
         document.addEventListener('mousedown', this.handleClick, false);
     };
     Modal.prototype.render = function () {
+        var _this = this;
         var _a = this.props, trigger = _a.trigger, _b = _a.mountNode, mountNode = _b === void 0 ? document.body : _b;
         var open = this.state.open;
-        return (React.createElement(Portal, { trigger: trigger, mountNode: mountNode, open: this.state.open, onOpenChange: this.handlePortalOpenChange },
-            React.createElement(Dimmer, { open: open, className: "dimmer" }, this.renderContent())));
+        return (React.createElement(Transition, { in: this.state.open, timeout: 0 }, function (state) {
+            return (React.createElement(Portal, { trigger: trigger, mountNode: mountNode, open: _this.state.open, onOpenChange: _this.handlePortalOpenChange },
+                React.createElement(Dimmer, { open: open, transitionState: state, className: "dimmer" }, _this.renderContent())));
+        }));
     };
     Modal.Header = ModalHeader;
     Modal.Content = ModalContent;
     return Modal;
 }(Component));
 export default Modal;
-var Dimmer = withProps()(styled.div)(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n  -webkit-animation-duration: 0.3s;\n  animation-duration: 0.3s;\n  -webkit-animation-timing-function: ease;\n  animation-timing-function: ease;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n\n  display: none;\n  position: absolute;\n  top: 0 !important;\n  left: 0 !important;\n  width: 100%;\n  height: 100%;\n  text-align: center;\n  vertical-align: middle;\n  padding: 1em;\n  background-color: rgba(0, 0, 0, 0.85);\n  opacity: 0;\n  line-height: 1;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n  -webkit-animation-duration: 0.5s;\n  animation-duration: 0.5s;\n  -webkit-transition: background-color 0.5s linear;\n  transition: background-color 0.5s linear;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n  -ms-flex-direction: column;\n  flex-direction: column;\n  -webkit-box-align: center;\n  -ms-flex-align: center;\n  align-items: center;\n  -webkit-box-pack: center;\n  -ms-flex-pack: center;\n  justify-content: center;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  will-change: opacity;\n  z-index: 1000;\n\n  position: fixed;\n  -webkit-transform-style: '';\n  transform-style: '';\n  -webkit-perspective: 2000px;\n  perspective: 2000px;\n  -webkit-transform-origin: center center;\n  transform-origin: center center;\n\n  ", ";\n"], ["\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n  -webkit-animation-duration: 0.3s;\n  animation-duration: 0.3s;\n  -webkit-animation-timing-function: ease;\n  animation-timing-function: ease;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n\n  display: none;\n  position: absolute;\n  top: 0 !important;\n  left: 0 !important;\n  width: 100%;\n  height: 100%;\n  text-align: center;\n  vertical-align: middle;\n  padding: 1em;\n  background-color: rgba(0, 0, 0, 0.85);\n  opacity: 0;\n  line-height: 1;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n  -webkit-animation-duration: 0.5s;\n  animation-duration: 0.5s;\n  -webkit-transition: background-color 0.5s linear;\n  transition: background-color 0.5s linear;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n  -ms-flex-direction: column;\n  flex-direction: column;\n  -webkit-box-align: center;\n  -ms-flex-align: center;\n  align-items: center;\n  -webkit-box-pack: center;\n  -ms-flex-pack: center;\n  justify-content: center;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  will-change: opacity;\n  z-index: 1000;\n\n  position: fixed;\n  -webkit-transform-style: '';\n  transform-style: '';\n  -webkit-perspective: 2000px;\n  perspective: 2000px;\n  -webkit-transform-origin: center center;\n  transform-origin: center center;\n\n  ",
-    ";\n"])), function (props) {
-    if (props.open) {
-        return css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n        display: block !important;\n        visibility: visible !important;\n        display: -webkit-box;\n        display: -ms-flexbox;\n        display: flex !important;\n        opacity: 1;\n      "], ["\n        display: block !important;\n        visibility: visible !important;\n        display: -webkit-box;\n        display: -ms-flexbox;\n        display: flex !important;\n        opacity: 1;\n      "])));
-    }
-    return null;
-});
-var Container = withProps()(styled.div)(templateObject_9 || (templateObject_9 = __makeTemplateObject(["\n  width: 850px;\n  margin: 0;\n\n  z-index: 1001;\n  text-align: left;\n  background: #fff;\n  border: none;\n  -webkit-box-shadow: 1px 3px 3px 0 rgba(0, 0, 0, 0.2),\n    1px 3px 15px 2px rgba(0, 0, 0, 0.2);\n  box-shadow: 1px 3px 3px 0 rgba(0, 0, 0, 0.2),\n    1px 3px 15px 2px rgba(0, 0, 0, 0.2);\n  -webkit-transform-origin: 50% 25%;\n  transform-origin: 50% 25%;\n  -webkit-box-flex: 0;\n  -ms-flex: 0 0 auto;\n  flex: 0 0 auto;\n  border-radius: 0.28571429rem;\n  -webkit-user-select: text;\n  -moz-user-select: text;\n  -ms-user-select: text;\n  user-select: text;\n  will-change: top, left, margin, transform, opacity;\n\n  ", "\n"], ["\n  width: 850px;\n  margin: 0;\n\n  z-index: 1001;\n  text-align: left;\n  background: #fff;\n  border: none;\n  -webkit-box-shadow: 1px 3px 3px 0 rgba(0, 0, 0, 0.2),\n    1px 3px 15px 2px rgba(0, 0, 0, 0.2);\n  box-shadow: 1px 3px 3px 0 rgba(0, 0, 0, 0.2),\n    1px 3px 15px 2px rgba(0, 0, 0, 0.2);\n  -webkit-transform-origin: 50% 25%;\n  transform-origin: 50% 25%;\n  -webkit-box-flex: 0;\n  -ms-flex: 0 0 auto;\n  flex: 0 0 auto;\n  border-radius: 0.28571429rem;\n  -webkit-user-select: text;\n  -moz-user-select: text;\n  -ms-user-select: text;\n  user-select: text;\n  will-change: top, left, margin, transform, opacity;\n\n  ",
+var Container = withProps()(styled.div)(templateObject_7 || (templateObject_7 = __makeTemplateObject(["\n  width: 850px;\n  margin: 0;\n\n  z-index: 1001;\n  text-align: left;\n  background: #fff;\n  border: none;\n  -webkit-box-shadow: 1px 3px 3px 0 rgba(0, 0, 0, 0.2),\n    1px 3px 15px 2px rgba(0, 0, 0, 0.2);\n  box-shadow: 1px 3px 3px 0 rgba(0, 0, 0, 0.2),\n    1px 3px 15px 2px rgba(0, 0, 0, 0.2);\n  -webkit-transform-origin: 50% 25%;\n  transform-origin: 50% 25%;\n  -webkit-box-flex: 0;\n  -ms-flex: 0 0 auto;\n  flex: 0 0 auto;\n  border-radius: 0.28571429rem;\n  -webkit-user-select: text;\n  -moz-user-select: text;\n  -ms-user-select: text;\n  user-select: text;\n  will-change: top, left, margin, transform, opacity;\n\n  ", "\n"], ["\n  width: 850px;\n  margin: 0;\n\n  z-index: 1001;\n  text-align: left;\n  background: #fff;\n  border: none;\n  -webkit-box-shadow: 1px 3px 3px 0 rgba(0, 0, 0, 0.2),\n    1px 3px 15px 2px rgba(0, 0, 0, 0.2);\n  box-shadow: 1px 3px 3px 0 rgba(0, 0, 0, 0.2),\n    1px 3px 15px 2px rgba(0, 0, 0, 0.2);\n  -webkit-transform-origin: 50% 25%;\n  transform-origin: 50% 25%;\n  -webkit-box-flex: 0;\n  -ms-flex: 0 0 auto;\n  flex: 0 0 auto;\n  border-radius: 0.28571429rem;\n  -webkit-user-select: text;\n  -moz-user-select: text;\n  -ms-user-select: text;\n  user-select: text;\n  will-change: top, left, margin, transform, opacity;\n\n  ",
     "\n"])), function (props) {
     if (props.format === 'mini') {
-        return css(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n        width: 350px;\n      "], ["\n        width: 350px;\n      "])));
+        return css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n        width: 350px;\n      "], ["\n        width: 350px;\n      "])));
     }
     if (props.format === 'tiny') {
-        return css(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n        width: 510px;\n      "], ["\n        width: 510px;\n      "])));
+        return css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n        width: 510px;\n      "], ["\n        width: 510px;\n      "])));
     }
     if (props.format === 'small') {
-        return css(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n        width: 680px;\n      "], ["\n        width: 680px;\n      "])));
+        return css(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n        width: 680px;\n      "], ["\n        width: 680px;\n      "])));
     }
     if (props.format === 'large') {
-        return css(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n        width: 1020px;\n      "], ["\n        width: 1020px;\n      "])));
+        return css(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n        width: 1020px;\n      "], ["\n        width: 1020px;\n      "])));
     }
     if (props.format === 'fullscreen') {
-        return css(templateObject_7 || (templateObject_7 = __makeTemplateObject(["\n        width: 95% !important;\n        left: 0 !important;\n        margin: 1em auto;\n      "], ["\n        width: 95% !important;\n        left: 0 !important;\n        margin: 1em auto;\n      "])));
+        return css(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n        width: 95% !important;\n        left: 0 !important;\n        margin: 1em auto;\n      "], ["\n        width: 95% !important;\n        left: 0 !important;\n        margin: 1em auto;\n      "])));
     }
-    return css(templateObject_8 || (templateObject_8 = __makeTemplateObject(["\n      width: 80%;\n    "], ["\n      width: 80%;\n    "])));
+    return css(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n      width: 80%;\n    "], ["\n      width: 80%;\n    "])));
 });
-var CloseIcon = styled.i(templateObject_10 || (templateObject_10 = __makeTemplateObject(["\n  cursor: pointer;\n  position: absolute;\n  top: -2.5rem;\n  right: -2.5rem;\n  z-index: 1;\n  opacity: 0.8;\n  font-size: 1.25em;\n  color: #fff;\n  width: 2.25rem;\n  height: 2.25rem;\n  padding: 0.625rem 0 0 0;\n"], ["\n  cursor: pointer;\n  position: absolute;\n  top: -2.5rem;\n  right: -2.5rem;\n  z-index: 1;\n  opacity: 0.8;\n  font-size: 1.25em;\n  color: #fff;\n  width: 2.25rem;\n  height: 2.25rem;\n  padding: 0.625rem 0 0 0;\n"])));
-var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8, templateObject_9, templateObject_10;
+var Dimmer = withProps()(styled.div)(templateObject_11 || (templateObject_11 = __makeTemplateObject(["\n  display: none;\n  position: absolute;\n  top: 0 !important;\n  left: 0 !important;\n  width: 100%;\n  height: 100%;\n  text-align: center;\n  vertical-align: middle;\n  padding: 1em;\n  background-color: rgba(0, 0, 0, 0.85);\n  opacity: 0;\n  line-height: 1;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  will-change: opacity;\n  z-index: 1000;\ns  position: fixed;\n  \n  ", " {\n    -webkit-transform: scale(0.1);\n    -moz-transform: scale(0.1);\n    -ms-transform: scale(0.1);\n    transform: scale(0.1);\n    top: 300px;\n    opacity: 0;\n    -webkit-transition: all 0.3s;\n    -moz-transition: all 0.3s;\n    transition: all 0.3s;\n  }\n\n  ", "\n\n  ", "\n"], ["\n  display: none;\n  position: absolute;\n  top: 0 !important;\n  left: 0 !important;\n  width: 100%;\n  height: 100%;\n  text-align: center;\n  vertical-align: middle;\n  padding: 1em;\n  background-color: rgba(0, 0, 0, 0.85);\n  opacity: 0;\n  line-height: 1;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  will-change: opacity;\n  z-index: 1000;\ns  position: fixed;\n  \n  ", " {\n    -webkit-transform: scale(0.1);\n    -moz-transform: scale(0.1);\n    -ms-transform: scale(0.1);\n    transform: scale(0.1);\n    top: 300px;\n    opacity: 0;\n    -webkit-transition: all 0.3s;\n    -moz-transition: all 0.3s;\n    transition: all 0.3s;\n  }\n\n  ",
+    "\n\n  ",
+    "\n"])), Container, function (props) {
+    if (props.transitionState === 'entered') {
+        return css(templateObject_8 || (templateObject_8 = __makeTemplateObject(["\n        ", " {\n          -webkit-transform: scale(1);\n          -moz-transform: scale(1);\n          -ms-transform: scale(1);\n          transform: scale(1);\n          -webkit-transform: translate3d(0, -300px, 0);\n          transform: translate3d(0, -300px, 0);\n          opacity: 1;\n        }\n      "], ["\n        ", " {\n          -webkit-transform: scale(1);\n          -moz-transform: scale(1);\n          -ms-transform: scale(1);\n          transform: scale(1);\n          -webkit-transform: translate3d(0, -300px, 0);\n          transform: translate3d(0, -300px, 0);\n          opacity: 1;\n        }\n      "])), Container);
+    }
+    if (props.transitionState === 'exiting') {
+        return css(templateObject_9 || (templateObject_9 = __makeTemplateObject(["\n        ", " {\n          -webkit-transform: scale(0.1);\n          -moz-transform: scale(0.1);\n          -ms-transform: scale(0.1);\n          transform: scale(0.1);\n          -webkit-transform: translate3d(0, -300px, 0);\n          transform: translate3d(0, -300px, 0);\n          opacity: 0;\n        }\n      "], ["\n        ", " {\n          -webkit-transform: scale(0.1);\n          -moz-transform: scale(0.1);\n          -ms-transform: scale(0.1);\n          transform: scale(0.1);\n          -webkit-transform: translate3d(0, -300px, 0);\n          transform: translate3d(0, -300px, 0);\n          opacity: 0;\n        }\n      "])), Container);
+    }
+    return null;
+}, function (_a) {
+    var open = _a.open;
+    return open && css(templateObject_10 || (templateObject_10 = __makeTemplateObject(["\n      display: block !important;\n      visibility: visible !important;\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex !important;\n      opacity: 1;\n    "], ["\n      display: block !important;\n      visibility: visible !important;\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex !important;\n      opacity: 1;\n    "])));
+});
+var CloseIcon = styled.i(templateObject_12 || (templateObject_12 = __makeTemplateObject(["\n  cursor: pointer;\n  position: absolute;\n  top: -2.5rem;\n  right: -2.5rem;\n  z-index: 1;\n  opacity: 0.8;\n  font-size: 1.25em;\n  color: #fff;\n  width: 2.25rem;\n  height: 2.25rem;\n  padding: 0.625rem 0 0 0;\n"], ["\n  cursor: pointer;\n  position: absolute;\n  top: -2.5rem;\n  right: -2.5rem;\n  z-index: 1;\n  opacity: 0.8;\n  font-size: 1.25em;\n  color: #fff;\n  width: 2.25rem;\n  height: 2.25rem;\n  padding: 0.625rem 0 0 0;\n"])));
+var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8, templateObject_9, templateObject_10, templateObject_11, templateObject_12;
 //# sourceMappingURL=modal.js.map
