@@ -24,6 +24,9 @@ import styled from '../../styled/styled-components';
 var TableRow = function (_a) {
     var attention = _a.attention, children = _a.children, rest = __rest(_a, ["attention", "children"]);
     var cells = React.Children.map(children, function (child) {
+        if (child === null) {
+            return null;
+        }
         return React.cloneElement(child, __assign({ attention: typeof attention === 'undefined' ? true : attention }, rest));
     });
     return React.createElement(Row, null, cells);

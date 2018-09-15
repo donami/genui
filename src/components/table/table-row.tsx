@@ -8,6 +8,9 @@ type Props = {
 
 const TableRow: React.SFC<Props> = ({ attention, children, ...rest }) => {
   const cells = React.Children.map(children, child => {
+    if (child === null) {
+      return null;
+    }
     return React.cloneElement(child as any, {
       attention: typeof attention === 'undefined' ? true : attention,
       ...rest,
