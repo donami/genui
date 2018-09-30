@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Animation from '../../utils/animation';
 
 import styled, { css, withProps } from '../../styled/styled-components';
 
@@ -6,6 +7,8 @@ export type Props = {
   renderItem: (item: any) => any;
   items: any[];
   className?: string;
+  animationIn?: string;
+  animationOut?: string;
 };
 
 export type State = {
@@ -45,7 +48,7 @@ class Dropdown extends React.Component<Props, State> {
 
   render() {
     const items = this.renderItems();
-    const { children, className } = this.props;
+    const { children, className, animationIn, animationOut } = this.props;
 
     const injectedProps: any = {};
 
@@ -60,13 +63,20 @@ class Dropdown extends React.Component<Props, State> {
         <Text onClick={this.handleToggle} className="g-dropdown-text">
           {children}
         </Text>
-        <Menu active={this.state.active} className="g-dropdown-menu">
-          {items.map((item: any, index: number) => (
-            <Item key={index} className="g-dropdown-menu-item">
-              {item}
-            </Item>
-          ))}
-        </Menu>
+
+        <Animation
+          isVisible={this.state.active}
+          animationIn={animationIn || 'bounceIn'}
+          animationOut={animationOut || 'bounceOut'}
+        >
+          <Menu active={this.state.active} className="g-dropdown-menu">
+            {items.map((item: any, index: number) => (
+              <Item key={index} className="g-dropdown-menu-item">
+                {item}
+              </Item>
+            ))}
+          </Menu>
+        </Animation>
       </Container>
     );
   }
@@ -123,25 +133,12 @@ const Menu = withProps<{ active: boolean }>()(styled.div)`
   -webkit-box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
   box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
   border: 1px solid rgba(34, 36, 38, 0.15);
-  -webkit-transition: opacity 0.5s ease;
-  transition: opacity 0.5s ease;
   z-index: 11;
-
-  opacity: 0;
-  visibility: hidden;
-
   left: 0;
 
   cursor: auto;
   margin-top: 0.5em;
   border-radius: 0.28571429rem;
-
-  ${({ active }) =>
-    active &&
-    css`
-      visibility: visible;
-      opacity: 1;
-    `}
 `;
 
 const Item = styled.div`

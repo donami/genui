@@ -205,6 +205,7 @@ export const StyledButton = styled(Button)`
   will-change: '';
   -webkit-tap-highlight-color: transparent;
   overflow: visible;
+  transition: 0.3s ease-out;
 
   &:hover {
     background-color: #cacbcd;
