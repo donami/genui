@@ -82,7 +82,7 @@ var Button = function (_a) {
         content = React.createElement(Icon, { name: icon });
     }
     else if (loading) {
-        content = (React.createElement("i", { className: "fas fa-circle-notch fa-spin fast-spin", style: { margin: 0 } }));
+        content = React.createElement(Icon, { name: "fas fa-circle-notch fa-spin" });
     }
     if (to) {
         return (React.createElement(Link, __assign({ to: to }, injectedProps), content));
@@ -96,7 +96,7 @@ export var StyledButton = styled(Button)(templateObject_10 || (templateObject_10
     return icon && css(templateObject_8 || (templateObject_8 = __makeTemplateObject(["\n      padding: 0.78571429em 1em 0.78571429em;\n\n      i {\n        margin: 0;\n        opacity: 0.5;\n      }\n    "], ["\n      padding: 0.78571429em 1em 0.78571429em;\n\n      i {\n        margin: 0;\n        opacity: 0.5;\n      }\n    "])));
 }, function (_a) {
     var loading = _a.loading;
-    return loading && css(templateObject_9 || (templateObject_9 = __makeTemplateObject(["\n      padding: 0.78571429em 1em 0.78571429em;\n\n      i {\n        margin: 0;\n        -webkit-animation: fa-spin 1s infinite linear !important;\n        animation: fa-spin 1s infinite linear !important;\n      }\n    "], ["\n      padding: 0.78571429em 1em 0.78571429em;\n\n      i {\n        margin: 0;\n        -webkit-animation: fa-spin 1s infinite linear !important;\n        animation: fa-spin 1s infinite linear !important;\n      }\n    "])));
+    return loading && css(templateObject_9 || (templateObject_9 = __makeTemplateObject(["\n      padding: 0.78571429em 1em 0.78571429em;\n      cursor: default;\n      opacity: 0.45 !important;\n      background-image: none !important;\n      -webkit-box-shadow: none !important;\n      box-shadow: none !important;\n      pointer-events: none !important;\n\n      i {\n        margin: 0;\n        -webkit-animation: fa-spin 1s infinite linear !important;\n        animation: fa-spin 1s infinite linear !important;\n      }\n    "], ["\n      padding: 0.78571429em 1em 0.78571429em;\n      cursor: default;\n      opacity: 0.45 !important;\n      background-image: none !important;\n      -webkit-box-shadow: none !important;\n      box-shadow: none !important;\n      pointer-events: none !important;\n\n      i {\n        margin: 0;\n        -webkit-animation: fa-spin 1s infinite linear !important;\n        animation: fa-spin 1s infinite linear !important;\n      }\n    "])));
 });
 export default StyledButton;
 var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8, templateObject_9, templateObject_10;

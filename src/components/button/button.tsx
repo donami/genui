@@ -2,7 +2,6 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import Icon from '../icon/icon';
-import { withProps } from '../../styled/styled-components';
 
 const sizes = {
   mini: '0.78571429rem',
@@ -160,12 +159,7 @@ const Button: React.SFC<Props> = ({
   if (icon) {
     content = <Icon name={icon} />;
   } else if (loading) {
-    content = (
-      <i
-        className="fas fa-circle-notch fa-spin fast-spin"
-        style={{ margin: 0 }}
-      />
-    );
+    content = <Icon name="fas fa-circle-notch fa-spin" />;
   }
 
   if (to) {
@@ -255,6 +249,12 @@ export const StyledButton = styled(Button)`
     loading &&
     css`
       padding: 0.78571429em 1em 0.78571429em;
+      cursor: default;
+      opacity: 0.45 !important;
+      background-image: none !important;
+      -webkit-box-shadow: none !important;
+      box-shadow: none !important;
+      pointer-events: none !important;
 
       i {
         margin: 0;
