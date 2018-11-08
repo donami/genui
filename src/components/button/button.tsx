@@ -160,7 +160,12 @@ const Button: React.SFC<Props> = ({
   if (icon) {
     content = <Icon name={icon} />;
   } else if (loading) {
-    content = <Icon name="fas fa-circle-notch fa-spin" />;
+    content = (
+      <i
+        className="fas fa-circle-notch fa-spin fast-spin"
+        style={{ margin: 0 }}
+      />
+    );
   }
 
   if (to) {
@@ -243,6 +248,18 @@ export const StyledButton = styled(Button)`
       i {
         margin: 0;
         opacity: 0.5;
+      }
+    `};
+
+  ${({ loading }) =>
+    loading &&
+    css`
+      padding: 0.78571429em 1em 0.78571429em;
+
+      i {
+        margin: 0;
+        -webkit-animation: fa-spin 1s infinite linear !important;
+        animation: fa-spin 1s infinite linear !important;
       }
     `};
 `;
