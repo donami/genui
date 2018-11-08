@@ -2,13 +2,16 @@ var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cook
     if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
     return cooked;
 };
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
 };
 var __rest = (this && this.__rest) || function (s, e) {
     var t = {};
@@ -72,9 +75,15 @@ var disabled = function (_a) {
     return null;
 };
 var Button = function (_a) {
-    var to = _a.to, children = _a.children, circular = _a.circular, icon = _a.icon, props = __rest(_a, ["to", "children", "circular", "icon"]);
+    var to = _a.to, children = _a.children, circular = _a.circular, icon = _a.icon, loading = _a.loading, props = __rest(_a, ["to", "children", "circular", "icon", "loading"]);
     var injectedProps = __assign({}, props, { circular: circular ? 1 : 0 });
-    var content = icon ? React.createElement(Icon, { name: icon }) : children;
+    var content = children;
+    if (icon) {
+        content = React.createElement(Icon, { name: icon });
+    }
+    else if (loading) {
+        content = React.createElement(Icon, { name: "fas fa-circle-notch fa-spin" });
+    }
     if (to) {
         return (React.createElement(Link, __assign({ to: to }, injectedProps), content));
     }

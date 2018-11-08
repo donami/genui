@@ -139,6 +139,7 @@ export interface Props {
   onClick?: any;
   children: any;
   to?: string;
+  loading?: boolean;
 }
 
 const Button: React.SFC<Props> = ({
@@ -146,6 +147,7 @@ const Button: React.SFC<Props> = ({
   children,
   circular,
   icon,
+  loading,
   ...props
 }) => {
   const injectedProps = {
@@ -153,7 +155,13 @@ const Button: React.SFC<Props> = ({
     circular: circular ? 1 : 0,
   };
 
-  const content = icon ? <Icon name={icon} /> : children;
+  let content = children;
+
+  if (icon) {
+    content = <Icon name={icon} />;
+  } else if (loading) {
+    content = <Icon name="fas fa-circle-notch fa-spin" />;
+  }
 
   if (to) {
     return (
