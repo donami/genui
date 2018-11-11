@@ -255,6 +255,7 @@ export const StyledButton = styled(Button)`
       -webkit-box-shadow: none !important;
       box-shadow: none !important;
       pointer-events: none !important;
+      outline: none;
 
       i {
         margin: 0;

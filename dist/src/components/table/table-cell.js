@@ -50,24 +50,32 @@ var TableCell = function (_a) {
                 React.createElement("div", { className: "table-cell-option" },
                     React.createElement(Confirm, { header: option.confirm.header, trigger: option.confirm.trigger, content: option.confirm.content, onActionClick: option.confirm.onActionClick }))));
         }
-        return (React.createElement(Cell, __assign({}, rest),
+        return (React.createElement(Cell, __assign({}, rest, { optionDisabled: !!option.disabled }),
             option.to && (React.createElement(Link, { to: option.to, className: "table-cell-option" },
                 React.createElement(Icon, { name: option.icon }))),
             option.onClick && (React.createElement("div", { onClick: option.onClick, className: "table-cell-option" },
+                React.createElement(Icon, { name: option.icon }))),
+            option.disabled && (React.createElement("div", { className: "table-cell-option" },
                 React.createElement(Icon, { name: option.icon })))));
     }
     return React.createElement(Cell, __assign({}, rest), children);
 };
 export default TableCell;
-var Cell = withProps()(styled.td)(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  padding: 20px;\n  border-bottom: #e9edf0 1px solid;\n  background: #fff;\n\n  > * {\n    vertical-align: middle;\n  }\n\n  .table-cell-option {\n    cursor: pointer;\n    padding: 7.5px 15px;\n    border-radius: 20px;\n\n    a {\n      color: #232c55;\n    }\n\n    &:hover {\n      background: #e6f8fc;\n\n      i {\n        color: #00b9d2;\n      }\n    }\n  }\n\n  i {\n    opacity: 0.5;\n  }\n\n  .avatar {\n    margin-right: 5px;\n  }\n  \n  ", "\n\n  ", "\n"], ["\n  padding: 20px;\n  border-bottom: #e9edf0 1px solid;\n  background: #fff;\n\n  > * {\n    vertical-align: middle;\n  }\n\n  .table-cell-option {\n    cursor: pointer;\n    padding: 7.5px 15px;\n    border-radius: 20px;\n\n    a {\n      color: #232c55;\n    }\n\n    &:hover {\n      background: #e6f8fc;\n\n      i {\n        color: #00b9d2;\n      }\n    }\n  }\n\n  i {\n    opacity: 0.5;\n  }\n\n  .avatar {\n    margin-right: 5px;\n  }\n  \n  ",
+var Cell = withProps()(styled.td)(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  padding: 20px;\n  border-bottom: #e9edf0 1px solid;\n  background: #fff;\n\n  > * {\n    vertical-align: middle;\n  }\n\n  .table-cell-option {\n    cursor: pointer;\n    padding: 7.5px 15px;\n    border-radius: 20px;\n\n    a {\n      color: #232c55;\n    }\n\n    ", "\n  }\n\n  i {\n    opacity: 0.5;\n  }\n\n  .avatar {\n    margin-right: 5px;\n  }\n  \n  ", "\n\n  ", "\n"], ["\n  padding: 20px;\n  border-bottom: #e9edf0 1px solid;\n  background: #fff;\n\n  > * {\n    vertical-align: middle;\n  }\n\n  .table-cell-option {\n    cursor: pointer;\n    padding: 7.5px 15px;\n    border-radius: 20px;\n\n    a {\n      color: #232c55;\n    }\n\n    ",
+    "\n  }\n\n  i {\n    opacity: 0.5;\n  }\n\n  .avatar {\n    margin-right: 5px;\n  }\n  \n  ",
     "\n\n  ",
-    "\n"])), function (_a) {
+    "\n"])), function (props) {
+    if (props.optionDisabled) {
+        return css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n          opacity: 0.5;\n        "], ["\n          opacity: 0.5;\n        "])));
+    }
+    return css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n        &:hover {\n          background: #e6f8fc;\n\n          i {\n            color: #00b9d2;\n          }\n        }\n      "], ["\n        &:hover {\n          background: #e6f8fc;\n\n          i {\n            color: #00b9d2;\n          }\n        }\n      "])));
+}, function (_a) {
     var textAlign = _a.textAlign;
-    return textAlign && css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n      text-align: ", ";\n    "], ["\n      text-align: ", ";\n    "])), textAlign);
+    return textAlign && css(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n      text-align: ", ";\n    "], ["\n      text-align: ", ";\n    "])), textAlign);
 }, function (_a) {
     var options = _a.options;
-    return options && css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n      text-align: right;\n    "], ["\n      text-align: right;\n    "])));
+    return options && css(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n      text-align: right;\n    "], ["\n      text-align: right;\n    "])));
 });
-var StyledDropdown = styled(Dropdown)(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  line-height: normal;\n  align-self: center;\n\n  .g-dropdown-menu {\n    left: -120px;\n    top: 83%;\n\n    a {\n      color: #232c55;\n    }\n\n    i {\n      margin-right: 0.5em;\n    }\n  }\n"], ["\n  line-height: normal;\n  align-self: center;\n\n  .g-dropdown-menu {\n    left: -120px;\n    top: 83%;\n\n    a {\n      color: #232c55;\n    }\n\n    i {\n      margin-right: 0.5em;\n    }\n  }\n"])));
-var templateObject_1, templateObject_2, templateObject_3, templateObject_4;
+var StyledDropdown = styled(Dropdown)(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  line-height: normal;\n  align-self: center;\n\n  .g-dropdown-menu {\n    left: -120px;\n    top: 83%;\n\n    a {\n      color: #232c55;\n    }\n\n    i {\n      margin-right: 0.5em;\n    }\n  }\n"], ["\n  line-height: normal;\n  align-self: center;\n\n  .g-dropdown-menu {\n    left: -120px;\n    top: 83%;\n\n    a {\n      color: #232c55;\n    }\n\n    i {\n      margin-right: 0.5em;\n    }\n  }\n"])));
+var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6;
 //# sourceMappingURL=table-cell.js.map

@@ -21,6 +21,7 @@ type Props = {
     icon: string;
     onClick?: any;
     to?: string;
+    disabled?: boolean;
     confirm?: {
       header?: string;
       content?: string;
@@ -83,7 +84,7 @@ const TableCell: React.SFC<Props> = ({
     }
 
     return (
-      <Cell {...rest}>
+      <Cell {...rest} optionDisabled={!!option.disabled}>
         {option.to && (
           <Link to={option.to} className="table-cell-option">
             <Icon name={option.icon} />
@@ -92,6 +93,12 @@ const TableCell: React.SFC<Props> = ({
 
         {option.onClick && (
           <div onClick={option.onClick} className="table-cell-option">
+            <Icon name={option.icon} />
+          </div>
+        )}
+
+        {option.disabled && (
+          <div className="table-cell-option">
             <Icon name={option.icon} />
           </div>
         )}
@@ -104,7 +111,7 @@ const TableCell: React.SFC<Props> = ({
 
 export default TableCell;
 
-const Cell = withProps<Props>()(styled.td)`
+const Cell = withProps<Props & { optionDisabled?: boolean }>()(styled.td)`
   padding: 20px;
   border-bottom: #e9edf0 1px solid;
   background: #fff;
@@ -122,13 +129,22 @@ const Cell = withProps<Props>()(styled.td)`
       color: #232c55;
     }
 
-    &:hover {
-      background: #e6f8fc;
-
-      i {
-        color: #00b9d2;
+    ${props => {
+      if (props.optionDisabled) {
+        return css`
+          opacity: 0.5;
+        `;
       }
-    }
+      return css`
+        &:hover {
+          background: #e6f8fc;
+
+          i {
+            color: #00b9d2;
+          }
+        }
+      `;
+    }}
   }
 
   i {
