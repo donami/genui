@@ -161,6 +161,9 @@ class TableBuilder extends Component<Props, State> {
     this.setState({ sortOrder, sortBy: property }, () => this.filterItems());
   };
 
+  /**
+   * Clear existing filters to initial state
+   */
   clearFilter = () => {
     this.setState(
       {
@@ -168,6 +171,19 @@ class TableBuilder extends Component<Props, State> {
       },
       () => this.filterItems()
     );
+  };
+
+  /**
+   * Returns true if a filter is defined
+   */
+  hasFilter = () => {
+    return Object.keys(this.state.filter).reduce((acc, key) => {
+      if (this.state.filter[key].length > 0) {
+        return true;
+      }
+
+      return acc;
+    }, false);
   };
 
   render() {
@@ -204,9 +220,12 @@ class TableBuilder extends Component<Props, State> {
                   }}
                 />
               ))}
-              <div style={{ display: 'inline-block' }}>
-                <Button onClick={this.clearFilter}>Clear</Button>
-              </div>
+
+              {this.hasFilter() && (
+                <div style={{ display: 'inline-block' }}>
+                  <Button onClick={this.clearFilter}>Clear</Button>
+                </div>
+              )}
             </div>
           )}
 

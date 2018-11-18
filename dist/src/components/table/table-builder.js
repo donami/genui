@@ -127,6 +127,14 @@ var TableBuilder = /** @class */ (function (_super) {
                 filter: {},
             }, function () { return _this.filterItems(); });
         };
+        _this.hasFilter = function () {
+            return Object.keys(_this.state.filter).reduce(function (acc, key) {
+                if (_this.state.filter[key].length > 0) {
+                    return true;
+                }
+                return acc;
+            }, false);
+        };
         return _this;
     }
     TableBuilder.prototype.componentWillMount = function () {
@@ -156,8 +164,8 @@ var TableBuilder = /** @class */ (function (_super) {
                             }
                             _this.handleFilterChange(selectedValue, filter.property);
                         } })); }),
-                    React.createElement("div", { style: { display: 'inline-block' } },
-                        React.createElement(Button, { onClick: this.clearFilter }, "Clear")))),
+                    this.hasFilter() && (React.createElement("div", { style: { display: 'inline-block' } },
+                        React.createElement(Button, { onClick: this.clearFilter }, "Clear"))))),
                 filteredItems.length <= 0 && (React.createElement(NoMatches, null, "No matches found.")),
                 filteredItems.length > 0 && (React.createElement(Table, null,
                     React.createElement(Table.Header, null,
