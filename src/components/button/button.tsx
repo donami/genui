@@ -136,7 +136,7 @@ export interface Props {
   disabled?: boolean;
   circular?: boolean;
   onClick?: any;
-  children: any;
+  children?: any;
   to?: string;
   loading?: boolean;
 }

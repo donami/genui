@@ -223,7 +223,7 @@ class TableBuilder extends Component<Props, State> {
 
               {this.hasFilter() && (
                 <div style={{ display: 'inline-block' }}>
-                  <Button onClick={this.clearFilter}>Clear</Button>
+                  <Button onClick={this.clearFilter} icon="fas fa-times" />
                 </div>
               )}
             </div>

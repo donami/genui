@@ -122,11 +122,17 @@ var TableBuilder = /** @class */ (function (_super) {
             var sortOrder = _this.state.sortOrder === 'desc' ? 'asc' : 'desc';
             _this.setState({ sortOrder: sortOrder, sortBy: property }, function () { return _this.filterItems(); });
         };
+        /**
+         * Clear existing filters to initial state
+         */
         _this.clearFilter = function () {
             _this.setState({
                 filter: {},
             }, function () { return _this.filterItems(); });
         };
+        /**
+         * Returns true if a filter is defined
+         */
         _this.hasFilter = function () {
             return Object.keys(_this.state.filter).reduce(function (acc, key) {
                 if (_this.state.filter[key].length > 0) {
@@ -165,7 +171,7 @@ var TableBuilder = /** @class */ (function (_super) {
                             _this.handleFilterChange(selectedValue, filter.property);
                         } })); }),
                     this.hasFilter() && (React.createElement("div", { style: { display: 'inline-block' } },
-                        React.createElement(Button, { onClick: this.clearFilter }, "Clear"))))),
+                        React.createElement(Button, { onClick: this.clearFilter, icon: "fas fa-times" }))))),
                 filteredItems.length <= 0 && (React.createElement(NoMatches, null, "No matches found.")),
                 filteredItems.length > 0 && (React.createElement(Table, null,
                     React.createElement(Table.Header, null,
