@@ -133,6 +133,7 @@ const Cell = withProps<Props & { optionDisabled?: boolean }>()(styled.td)`
       if (props.optionDisabled) {
         return css`
           opacity: 0.5;
+          cursor: not-allowed;
         `;
       }
       return css`

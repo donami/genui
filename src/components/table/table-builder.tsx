@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import TableFilter from './table-filter';
 import Table from './table';
 import styled from '../../styled/styled-components';
+import Button from '../button/index';
 
 export const TableContext = React.createContext({
   handleSort: (property: string) => {},
@@ -160,6 +161,15 @@ class TableBuilder extends Component<Props, State> {
     this.setState({ sortOrder, sortBy: property }, () => this.filterItems());
   };
 
+  clearFilter = () => {
+    this.setState(
+      {
+        filter: {},
+      },
+      () => this.filterItems()
+    );
+  };
+
   render() {
     const { filters } = this.props;
     const { filteredItems, selected, sortOrder, sortBy } = this.state;
@@ -194,6 +204,9 @@ class TableBuilder extends Component<Props, State> {
                   }}
                 />
               ))}
+              <div style={{ display: 'inline-block' }}>
+                <Button onClick={this.clearFilter}>Clear</Button>
+              </div>
             </div>
           )}
 
