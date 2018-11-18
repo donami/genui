@@ -66,7 +66,7 @@ var Cell = withProps()(styled.td)(templateObject_5 || (templateObject_5 = __make
     "\n\n  ",
     "\n"])), function (props) {
     if (props.optionDisabled) {
-        return css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n          opacity: 0.5;\n        "], ["\n          opacity: 0.5;\n        "])));
+        return css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n          opacity: 0.5;\n          cursor: not-allowed;\n        "], ["\n          opacity: 0.5;\n          cursor: not-allowed;\n        "])));
     }
     return css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n        &:hover {\n          background: #e6f8fc;\n\n          i {\n            color: #00b9d2;\n          }\n        }\n      "], ["\n        &:hover {\n          background: #e6f8fc;\n\n          i {\n            color: #00b9d2;\n          }\n        }\n      "])));
 }, function (_a) {

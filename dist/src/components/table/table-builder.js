@@ -30,6 +30,7 @@ import React, { Component } from 'react';
 import TableFilter from './table-filter';
 import Table from './table';
 import styled from '../../styled/styled-components';
+import Button from '../button/index';
 export var TableContext = React.createContext({
     handleSort: function (property) { },
     sortBy: '',
@@ -121,6 +122,11 @@ var TableBuilder = /** @class */ (function (_super) {
             var sortOrder = _this.state.sortOrder === 'desc' ? 'asc' : 'desc';
             _this.setState({ sortOrder: sortOrder, sortBy: property }, function () { return _this.filterItems(); });
         };
+        _this.clearFilter = function () {
+            _this.setState({
+                filter: {},
+            }, function () { return _this.filterItems(); });
+        };
         return _this;
     }
     TableBuilder.prototype.componentWillMount = function () {
@@ -139,16 +145,19 @@ var TableBuilder = /** @class */ (function (_super) {
                     sortOrder: sortOrder || '',
                     handleSort: this.handleSortBy,
                 } },
-                filters && (React.createElement("div", { style: { textAlign: 'right', marginBottom: 20 } }, filters.map(function (filter) { return (React.createElement(TableFilter, { key: filter.property, label: filter.label, inputType: filter.inputType || 'select', placeholder: filter.placeholder, options: filter.options, onChange: function (value) {
-                        var selectedValue = value;
-                        if (value === 'false') {
-                            selectedValue = false;
-                        }
-                        if (value === 'true') {
-                            selectedValue = true;
-                        }
-                        _this.handleFilterChange(selectedValue, filter.property);
-                    } })); }))),
+                filters && (React.createElement("div", { style: { textAlign: 'right', marginBottom: 20 } },
+                    filters.map(function (filter) { return (React.createElement(TableFilter, { key: filter.property, label: filter.label, inputType: filter.inputType || 'select', placeholder: filter.placeholder, options: filter.options, onChange: function (value) {
+                            var selectedValue = value;
+                            if (value === 'false') {
+                                selectedValue = false;
+                            }
+                            if (value === 'true') {
+                                selectedValue = true;
+                            }
+                            _this.handleFilterChange(selectedValue, filter.property);
+                        } })); }),
+                    React.createElement("div", { style: { display: 'inline-block' } },
+                        React.createElement(Button, { onClick: this.clearFilter }, "Clear")))),
                 filteredItems.length <= 0 && (React.createElement(NoMatches, null, "No matches found.")),
                 filteredItems.length > 0 && (React.createElement(Table, null,
                     React.createElement(Table.Header, null,
